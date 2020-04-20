@@ -1,0 +1,74 @@
+Thompson Sampling:
+
+	An online recommendation system, for example, uses historical data to optimize
+	current recommendations, but the outcomes of these recommendations
+	are then fed back into the system and used to improve future recommendations. As a result, there is enormous potential benefit in the
+	design of algorithms that not only learn from past data, but also explore
+	systemically to generate useful data that improves future performance.
+
+	- Places that its applied : 
+		revenue management (Ferreira et al., 2015),
+		marketing (Schwartz et al., 2017), 
+		web site optimization (Hill et al.,2017), 
+		Monte Carlo tree search (Bai et al., 2013), 
+		A/B testing (Graepelet al., 2010), 
+		Internet advertising (Graepel et al., 2010; Agarwal, 2013;Agarwal et al., 2014), r
+		ecommendation systems ((Kawale et al., 2015),)
+
+
+	- Greedy Decision:
+		For k bandits, At each time t, a greedy algorithm would generate an estimate ˆθk of
+		the mean reward for each kth action, and select the action that attains
+		the maximum among these estimates. It will never converge to true distributions of the bandits.
+
+		To improve this dithering is used.  One version of dithering, called e-greedy exploration, applies the
+		greedy action with probability 1 − e and otherwise selects an action
+		uniformly at random. Now this will also give a uniform chance to already explored in-efficient actions, which will increase the overall regret.
+
+	- Thompson Sampling : 
+		Problem : Let there be k bandits, with reward r = {0,1}, probability of success : θk.
+				  Let a1,a2,...ak. and b1,b2,...bk  be the initial prams of the beta ditribution of the probablity of success of each arm.
+
+				  P(θ = θk) = θk^(a1-1)*(1-θk)^(b1-1)*(GAMMA(a1+b1)/GAMMA(a1)*GAMMA(b1)
+
+		Solution:		 a1,b1 : {
+				  			a1,b1 			if x!=x1
+				  			b1,b1 + r,1-r.  if x=x1
+				  		  }
+
+
+		Algorithm 1 BernGreedy(K, α, β)
+			1: for t = 1, 2, . . . do
+			2: #estimate model:
+			3: for k = 1, . . . , K do
+			4: θˆk ← αk/(αk + βk)
+			5: end for
+			6:
+			7: #select and apply action:
+			8: xt ← argmaxk θˆk
+			9: Apply xt and observe rt
+			10:
+			11: #update distribution:
+			12: (αxt
+			, βxt
+			) ← (αxt + rt, βxt + 1 − rt) 
+
+		Algorithm 2 BernTS(K, α, β)
+			1: for t = 1, 2, . . . do
+			2: #sample model:
+			3: for k = 1, . . . , K do
+			4: Sample θˆk ∼ beta(αk, βk)
+			5: end for
+			6:
+			7: #select and apply action:
+			8: xt ← argmaxk θˆk
+			9: Apply xt and observe rt
+			10:
+			11: #update distribution:
+			12: (αxt
+			, βxt
+			) ← (αxt + rt, βxt + 1 − rt)
+
+References :
+https://web.stanford.edu/~bvr/pubs/TS_Tutorial.pdf
+https://github.com/iosband/ts_tutorial

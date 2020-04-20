@@ -1,0 +1,211 @@
+Statistical Rethinking:
+
+Lecture 2:
+
+	Data Story->Condition->Evaluate
+
+	Data Story : 
+	Translate data story into probability statements
+	Condition : 
+	Give model a prior, and convert prior to posterior
+	(with more and more data coming in, the marginal shift decreases.)
+	The sequence of data does matter
+	The peak of posterior embodies the sample size
+	Evaluate :
+	1. Ask does the model makes sense
+	2. Does the question and answer make sense.
+	3. Check sensitvity of answers to change in assumption
+
+	Construction:
+
+	1. Build:
+		1. List vars : all available , or what you need to derive the inference
+		2. Define generative relation
+		3.
+
+	Input : Prior
+	Output : Posterior
+
+	** Bayesian inference goes backwords of causal, something has occured and then we try to infer.
+	** In causal we try to comment on what id causing what.
+
+	We will learn about predictive prior distribution to choose better priors.
+
+	Posterior : this is want we want to find out
+		Post = Likelihood x Prior / Normalizing constant
+	Computing Posterior :
+		1. Analytical
+		2. Grid approximation
+		3. Quadratic approximation
+		4. MCMC
+
+	Grid Approximation:
+		1. Define finite priors and and likelihood function
+		2. Get the posterior using bayes theorem.
+		3. Plot it to get the idea.
+		4. Sample from to use it further.
+
+	Percentile Intervals:
+	Highest Posterior Density Interval:
+
+	Interval:
+		1. Confidence
+		2. Credible
+		3. Compatible.
+
+	Predictive Checks :
+		1. Do prediction and see if it makes sense even.
+		2. Sample from posterior to do simulations.
+		3. Check your assumptions.
+
+
+Lecture 3
+
+	Linear Regression:
+		1. Model of normally distributed measures.
+		2. Mean modelled as weighted variables.
+		3. Variance is constant.
+
+	Why normal is normal :
+		1. very good properties, like additive
+		2 It occurs every where : it is so natural, it is actually made up of fluctuations. It you add these fluctuations you end up in bell curve not matter what the underlying distribution was.  Process like additions, product of small deviation are all guassian. But the bad part is that it is less informative and intuitive. The good part is that if know nothing about underlying process, then gussian is the best guess at it will have max entropy.
+
+	Linear Model:
+		1. Learn strategy and not procedure
+		2. t-test,single regression, multiple regression, anova, anacova etc are all same.
+		3. Take all the variables, both observed and unobserved and define their distributions. eg
+			yi ~ Norm(mui, sigma)
+			mui ~ B*xi
+			B ~ Unif()
+			xi ~ Norm()
+			sigma ~ Norm() 
+		Prior Predictive distributions : like sample from the priors that you have assumed and evaluate your assumptions e.g :
+			height ~ Norm(178,20) Vs height ~ Norm(178,100)
+			In 2nd case we see height > 278 and <0, which is not plausible.
+
+	Quadratic Approximation / Laplace Approximation:
+	1. Approximate posterior as gaussian
+	2. 
+
+Lecture 4:
+
+	Central Credible Region : [cdf-1(a),cdf-1(1-a)]
+	Highest posterior density region collides with central credible region in symmetric distributions : 
+		find largest k such that p(x)>k and integral(p(x))=1-alpha
+
+	For prediction : each prediction here is a distribution with some credible interval.
+
+	Polynomial Models:
+
+		1. Parabolic Models : 
+			drawback is that they are less interpretable. Need to look at all the params to interpret anything.
+			always better to standardize the predictors.
+			they cannot do monotonic relationships
+			always act responsibly with these models and always to predictive check, and check the boundaries
+
+		2. Splines :
+			Combination of many local functions called basis B's
+			mui = w0 + w1Bi1 + w2Bi2 .....
+			Bi's are build dependent of data, they are used to turn on/off the weights in different regions. Actually they are standard values between 0-1 that represent a local function.
+			Each basis function represents local region where it influences the spline.
+			Two params in hand we have in spline : degree and knots
+
+
+Lecture 5:
+
+	Multiple Regresison : 
+		1. Goods : remove spurrios vars, uncovers masked relations.
+
+	Spurrious Association:
+		
+		1. Causation does not imply correlation
+		1. Correlation does not imply Causation
+		1. Causation imply conditional correlation
+
+	Bayesian model does not have causal information.
+
+	DAGS : helpfull in defining causal relations.
+
+	Lets say
+		1. A causes B, B causes C, A causes C ( A->B->C)
+		2.A causes B,  A causes C ( B<-A->C )
+	If we have only B<->C then both 1 and 2 are possible scenerios, hence leading to spurrios relationships
+	Hence need conditional  association, i.e : B<->C|A
+
+
+	Posterior Prediction:
+		1. Predictor residual plots:
+			a. regress predictor on another predictors.
+			b. check residuals with the target variable.
+			c. this is actually done automatically by the multiple regression.
+		2.Counterfactual plot:
+			a. hold other predictors constant and try to regression on outcome for the other predictor
+		3. Posterior Prediction Checks:
+			a. check model, simulate new ideas.
+			b. dont always stick with mean, ebrace the uncertainity.
+
+	In code, we see multiple regression helps to find causal/spurrious relationships.
+
+	Masked Association:
+		Happens for  predictors that are working in opposite direction but do have influence on the target variable and on each other too. This tends too decrease the importance of the predictor in the single regression / scatter plots. Multiple regression helps in find out this masks. Happens a lot in the nature.
+
+	Categrical Variable:
+		1. dummy var:
+			becomes long with many categories
+			one prior is more certain the another one. (for 2 dummy vars : alpha + 0*beta, alpha+1*beta)
+		2. index var : better that dummy variable , no prior problem that was there in dummy vars.
+
+
+
+Lecture 6 ( haunted DAG and causal terror)
+
+	Most of the times we are doing observational studies, hence studying causation is important.
+	A/B or experimantation removes confounds, hence easier to derive inferences.
+
+	Categorical Vars:
+		1. index : better that dummy variable , no prior problem that was there in dummy vars.
+
+	Regression are powerfull, they do unveil some spurrious realations and umasks the variables, but ask them carefully, just not add variable but have some justification around it as :
+		0. adding vars creates confounds
+		1. residual confounding
+		2. overfitting
+
+	Selection Distort : 
+		Looks like there is some relation, but might have happened that the data that was select was not random.
+		The selection-distortion effect can happen inside of a multiple regression, because the act of adding a predictor in- duces statistical selection within the model
+
+
+	Knowing that you cannot get anything from data is also an information.
+
+	4 kinds of confounds :
+		1. fork : X <- Z -> Y
+			DE-confound it by conditioning on Z, i.e X is independent of Y given Z
+			same as divorce rate example : marriage_rate <- median_age -> divorce
+
+		2. pipe : X -> Z -> Y
+			DE-confound it by conditioning on Z, i.e X is independent of Y given Z
+			you break the upstream by doing this
+			post treatment bias : Treatment -> consequence of treatment -> outcome
+			It is a regression confound that arise when you are not aware of the causal relationship that some mediating variable might have on the out come, hence you end up conditioning on the mediating variable hence concluding that X does not effect Y. Which is not right.
+			Now you try to regress outcome for consequence of treatment and end up infering that treatment did not word/did work.
+		3. collider : X -> Z <- Y
+			VERY dangerous, happens all the time when try to do causal analysis
+			X and Y jointly causes Z
+			Conditioning on Z created dependency b/w Y and Y
+			this is what selection distort is, for e.g there is not statistical relation b.w trustworthiness and newworthiness, but when you condition on if the paper was published, you find 0.8 -ve correlation which is spurrious.
+
+			e.g switch -> light <- elctiricity
+
+			confounding on collider is like selecting the sub population
+		4. Descendent graph
+
+	recipe to block the confounds:
+		1. find all the path
+		2. close all the open paths by conditioning on different variables.
+
+	*** chain rule : P(A1,A2,A3,....AN) = P(A1|A2,A3...AN) * P(A2 | A3,...AN) ) .....P(AN-1|AN) * P(AN)
+
+	Experiments are not nessecary for causal inference, we can as stated above backdoor criterion to do that. Experiments are always not feasible also. For example in order to study obesity, in case of exepriments we do different things to like excersise etc., that helps us study causal network, but it at the same also effects other things in life, which is the advantage of obeservational studies as you can study obesity directly.
+
+
+Lecture 7

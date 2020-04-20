@@ -1,0 +1,10 @@
+Public key Infrastructure
+
+1. 3 way hanshake
+1. find dns (8.8.8.8), traceroute, 
+2. ca orgs, their costing 
+3. some cipher algos ( sha ), some key generating algo ( rsa vs aes/des/diffie helman ), some signing algo's (ecdsa)
+4. genrate your own ca certs.
+5. how place the certis in server
+6. what is vpn, create your own vpn
+7. nfs

@@ -1,0 +1,63 @@
+JVM :
+
+1. Important components :
+	1. Class Loader :
+		1. Loading : .class file is loaded into method area, that consists of class Name, its methods/contants/modifier info.
+					 Also an object of java.lang.Class is created which is put into heap. That consists of meta of the this class that is loaded.
+
+					 Three type of class loader ( getClassLoader() ) : 
+					 	1. Boostrap Class Loader : jvm -> jre -> lib -> rt.jar  ( all important classes, written in c/c++)
+					 	2. Extension Class Loader  : jvm -> jre -> lib -> ext -> *jar
+					 	3. Application class loader : This class loader is responsible to load classes from Application class path
+		2. Linking : 
+				1. Verification : Byte code Verifier checks code structure, formatting 
+				2. Preparation : Loads static vars with default values. 
+				3. Resolution : Replaces all symbolic references used in our class with original direct references from method area.
+								The names of these classes are stored in "Constant Pool" of "Resolution" class. From there the classes are loaded into method are.
+    							In Resolution phase these names are replaced with Actual references from the method area.
+    	3. Initialization : class level static vars are initialized and all the static blocks are executed.
+
+
+    	How does it work?
+
+    	Delagation heirarchy : If find any class name in constant pool of Our class that is not in method area then, the class is searchedin following order :  Application class loader -> Extension Class Loader -> Boostrap Class Loader
+
+    	Customized  class loader : MYClassLoader extends ClassLoader{}
+
+
+
+
+	2. Virtual Memory Areas :
+
+		1. Method Area : 
+			 For every JVM one method area will be available
+			 Method area will be created at the time of JVM start up.
+			 Inside method area class level binary data including static variables will be stored
+			 Constant pools of a class will be stored inside method area.
+			 Method area can be accessed by multiple threads simultaneously.
+			 The size of the method area need not be fixed. As the Java application runs, the virtual machine can expand and contract the method area to fit the application's needs.
+
+		2. Heap Area : 
+			Spawn only once.
+			Objects and corresponding instance variables will be stored in the heap area
+			Can be accessed by many threads at once.
+			-Xmx : max heap area
+			-Xms : min heap area
+
+		3. Stack Area : For every thread JVM a runtime stack is created, all method calls and corresponding variables will be stored here.
+
+		4. PC Registers : For every thread a separate PC register will be created at the time of thread creation
+		5. Native method Stack : 
+
+
+	3. Execution Engine : Each thread is a different instance of JVM execution engine. Each command of the byte code consists of a 1-byte OpCode and 						  additional Operand. Consist of 2 parts : 
+						  1. Interpreter : converts byte code to machine code
+						  2. JIT : Internally JIT compiler maintains a separate count for every method. Whenever JVM across any method call, first that
+						  		   method will be interpreted normally by the interpreter and JIT compiler increments the corresponding count variable. 
+
+
+
+Reference : https://www.waytoeasylearn.com/2016/04/jvm-tutorial.html
+			https://www.baeldung.com/jvm-parameters
+
+

@@ -1,0 +1,32 @@
+ANN : Approximate nearest neighbours
+
+
+1. Annoy Trees : Algo
+	Build Tree : (it is a binary tree)
+	1. Select two point at random and select hyperplane the bisect them
+	2. Repeat 1 by select random points till there are only k point in a section
+	3. Do 1 and 2 to create a forest.
+
+	Similarity for K vector:
+	1. Select the side of branch/hyperplane to which this vector lies.
+	2. Iterate this till the end.
+	3. Select the point in this closed figure.
+	4. Repeat this for the forest and select top N closest.
+
+	Time complexity for search is height of the tree.
+
+2. LSH : Locality Sensitive Hashing
+	Build Signature Matrix: ( D docs, P permutation )
+
+	1. For n-gram create the column vectors for all the documents with 1/0 indicating if that gram is present in the document.
+	2. Generate P permuation of row numbers.
+	3. Note for that permutation for each doc the index at which first 1 is encountered.
+	4. Do this for all the P.
+
+	Build Hash:
+	1. Select b each with r rows 
+	2. Hash each portion of signature matrix into hash array.
+	3. the colliding portions make the candidate documents similar.
+
+
+

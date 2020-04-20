@@ -1,0 +1,121 @@
+System Design:
+
+	Step be step thought process:
+		- specify requirements: take functional understanding of each component thoruoughly
+		- system interface specification : Define what APIs are expected from the system.
+		- back of the envolope calculation : get adea around 
+											- scale
+											- storage
+											- network bandwith for load balancing
+		- design data model : how data will flow among systems, think around storage, transoptation, encryption.
+							 What type of database would be required. This will help in thinking around partitioning and management.
+		- High level Design : write block diagram of the system.
+		- Detail Design : get ino each component
+		- identify bottleneck :
+
+	1. think around system Reliability.
+	2. how to do monitoring.
+	3. read heavy vs write heavy ( Scaling )
+	4. do failure driven development for system design. 
+	   Try to fail all the components in all scenerios.
+	   These failures are system component failures, data failures, network failures
+
+
+
+	System Design Basics:
+
+		Basic Concepts of Distributed Systems: 
+			1. Scalability : scalable in terms of data storage, number of transactions, manageability and cost.
+							 Vertical scalling and Horixontal scaling.
+			2. Reliability :  delivering its services even when one or several of its software or hardware components fail.
+
+			3. Availability : Reliability is availability over time considering the full range of possible real-world conditions that can occur.
+
+			4. Efficiency : Try to check for latency anf throughput. Generally speaking, the analysis of a distributed structure in terms of ‘number of 
+							messages’ is over-simplistic. It ignores the impact of many aspects, including the network topology, the network load, and its variation, the possible heterogeneity of the software and hardware components involved in data processing and routing, etc. However, it is quite difficult to develop a precise cost model that would accurately take into account all these performance factors; therefore, we have to live with rough but robust estimates of the system behavior.
+
+			5. Seviceability and Manageability : easy to service while system fails AND easy to daigonoze the system failure. 
+
+
+		Load Balancing : Can reside anywhere :
+							1. Between the user and the web server
+							2. Between web servers and an internal platform layer, like application servers or cache servers
+							3. Between internal platform layer and database.
+						To avoid SPOF there is secondary LB . Both of them keep each others health check and as soon as one goes down, other takes over.
+
+						Few concepts around LB:
+							1. It is kind of only routing service hence does not require much processing. 
+							2. It have keep-alive tcp for all incoming request from internet and keeps as pool of connections ( already created tcp sockets) for fast communication with the backed server.
+							3. There are two types of LB's : Layer 4 which works on network layer an only routes for ip's. Its mostly a hardware LB.
+															 The other one is Layer-7 LB that works on the application layer and extracts data all the way upto application layer and then routes the request.This also provides session-persitence whci hone the important aspect. 
+
+						Session Persitence
+						Cookies
+
+						SSL Offloading: tls till load balancer and then no encyption to backend servers.
+							- SSL was used initially now TLS is used, TLS lies just above transport layer(tcp), which uses a combination of symmetric and non-symmetric enryption/descyption, where a session key is generated for a tcp connection and exchanged through asymetric and then all the encryption decyption happens using this symmetric session key until session expires. This combination is used so a asymmetric is more resource intensive. Also server ip is gainerd through CA (certificate authority ) for asymmetric encryption. 
+
+						Application delivery controller : it is super set of LB with added functionalities such as caching, ssl offloading, load balancing, 
+
+
+						Check what is session persistence? how does it do the health check for avaliable servers? Does it maintain a persistent connection 
+						between itself and the backend server? 
+
+
+
+		Caching : always think around it as caching is typically 20-30 cpu cycles as compared to disk 1m cpu cycles.
+				  Two type:
+				  	1. Application Server Cache : This could be in-process cache (Node's local cache) or distributed cache (Redis)
+				  	2. Database Cache : out of the box performance.
+
+				  CDN : it is also kind of cache serving large static http/media files.
+
+				  Cache invalidation :
+				  	1. Write through : write both in cache and persistent store at same time.
+				  	2. Write around : only in persistent store.
+				  	3. Write back : only in cache and in periodic interval to persistent store.
+
+
+		Sharding or Data Partitioning: dividing database into smaller parts for better scalabitliy, avalability, manageability and load balancing.
+				Paritioning Methods:
+					1. Horizontal Partitioning : Based on key for example region name, shard the data.
+					2. Vertical Partitioning : create table for specific functionality and store it in different servers.
+					3. Hash Based Sharding : based on hash of a key, find mod and store data in specific server.
+					3. Directory Based Partitioning : Have a seperate lookup service created which keeps current 
+													  sharding function and the map to the shard. Client queries 
+													  and gets the shard from lookup service and then hit the specific db/location.
+													  E.g namenode, hbase.
+
+				Partitioning Criteria :
+					1. Key/Hashed Based Partitioning : [consistent hashing]
+					2. List Partitioning
+					3. Round robin
+					4. Composite
+
+
+				Common Problems :
+					1. Joins : Joins cannot happen as the table is sharded now, better to have denormalized table hence avoinding joins itself.
+					2. Referel Integrity : Constraints such as foreign key will performe worse, hence should be handled in application code itself.
+					3. Rebalancing : For each change in sharding scheme, there will be re-migration of the whole data which will incurr downtime.
+									 Could be avoided using scehems such as directoy based partitioning. But that may turn out to be SPOF.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,38 @@
+Coding Principles : 
+
+0. The basic principle is always write code that is easily readable and understandable. Dont over-engineer it.
+
+1. TDD : Test driven development.
+	As testing is to develoment, simulation is to modeling
+
+2. Logging, Monitoring and Alerting:
+
+	Logging :Have logging in place for every app you write, helps to do debugging and root cause
+			analysis. Basicly why and how things are failing.
+	Monitoring : Monitoring is required for each app/model to have performance measures in place. This 
+				will give us scope of improvements.
+	Alerting : Alerting for each app should be there otherwise you would not be able to identify 
+			  what and when things are failing.
+
+3. Follow seperate naming convention for 
+		variables[camelCasing], 
+		functions[underscore_seprated], 
+		classes [CamelCasing],
+		class variable [__varName],
+		global constant [ALL_CAPITAL]
+	Name of the variable should explain all the stuff.
+	Do linting
+https://www.toptal.com/python/tips-and-practices
+
+4. S.O.L.I.D : OOD principle
+	
+	1. Single Responsibillity : one class should have only one reason to change. That is they should do one and only one thing.
+	2. Open Closed Principle : means open to extension but closed for change. That is use interfaces and implement them wherever required.
+	3. Liskov blah blah : dont shit around with implementation of interfaces, otherwise incisistency will shit on you.
+	4. Interface segregation : Have interfaces too segregated, never force client to implement something which is not required
+	5. Dependecy Inversion : always classes should depend on abstraction and not concretions.
+
+
+5. Single responsibility in Functions is really important. Every function should be of typically <=5 lines of code and should do only one thing.
+
+6. Dont repeat yourself ever.

@@ -1,0 +1,27 @@
+Nodejs: 
+
+Intro:
+	way to run js on server and not limiting to browsers. 
+	Nodejs is js runtime to run js on server built on chrome's v8 engine ( cpp )
+	Runtime env is the env that is created for running a peace of code. 
+	Hence nodejs provides c++ binding to do some extra tasks to v8 engine. Tasks such a access file system, open sockets etc run with the help of these bindings.
+	Chrome browser is also just a runntime but with different functionalities ( such a access dom).
+	Console.log is not part of js, rather it is  by runtime of both chrome and node.
+
+What is callback:
+	Any function given as arg in function is a callback. 
+	Its not nesseacry that all the callback will be async. Only the one that are related to native node api as async.
+
+Call stack, callback queue, Event loop:
+	1. main() that is implicilty put by jit compiler is at the bottom of call stack.
+	2. each function call is put into stack.
+	3. Any time taking function or a function that is actually a part of libuv are handled by seperate pool of threads. 
+	4. Pair of event and callback function is registered there.
+	5. As and when event is executed, the callback is put into callback queue.
+	6. When the call stack becomes empty, callback function is put into the call stack and then executed.
+
+Standards:
+	Follow the following standards:
+		1. use const and let : better scoping
+		2. Try to use arrow functions, also try place functions in const.
+		3. use ===, put else in same line

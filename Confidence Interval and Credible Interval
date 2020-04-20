@@ -1,0 +1,35 @@
+Confidence Interval and Credible Interval
+
+Frequentist : 
+	1. statistics/thetas are fixed 
+	2. Data is considered a random variable, random data generating process generated this data, data follows some distribution , 
+	3. We calculate MLE where we fnd theta that maximises the probability of that dat being generated
+	3. Hence MLE(theta;D) = max(theta) MULTIPLY ( P(D|theta))  =  max(theta) Likelihod(D|theta)
+
+Bayesian :
+	1. statistics/thetas are considred to follow some prior distribution.
+	2. Data is also generated with some data generating process.
+	3. We calculate theta based on the prior distribution and likelihood of this data occuring given the theta.
+
+
+Confidence Interval : 
+
+To understand CI, understand the concept of sampling. According to frequentist, population will have fixed statistic , for e.g mean,variance,params of a model. But since we always get a sample to play with, there will be difference in this statistic for every sample. Hence we need a an interval to say where this true statistic might lie according to the statistic of sample. Hence with CI,sample statistic will vary according to the sample. Sample means as we know from CLT will converge to normal distribution for larger samples. 
+
+It is frequentist approach, where statistic is assumed to be fixed, hence CI is only tell that statistic might lie in that interval with a certain confidence (probability). In the long run this will be true. For e.g in Confidence on 95% means that out of 10K CI's we find , 9500 will have true population statistic.
+
+
+	1. mostly you will try to find the exepected value of rv, E[X]
+	2. Always we are working with the sample, hence whatever statistic we find, will vary as we take new samples.
+	3. Data(random variable) will have some distribution that we will sample from.
+	4. That random will have mean and variance. 
+	5. CI = [ x_sample - margin_error , x_sample + margin_error ]
+	5. Various ways to find confidence interval :
+		1. with normal assumption, find z when population variance is known (central limit theorem)
+		2. with normal assumption, find t when population variance is unkown (central limit theorem)
+		3. bootstaping with quantiles when pdf is known (classic example of low of large numbers)
+	6. We can find variance of coefficients in linear regression because it depends on y and x, which themselves are random variables. 
+	   Hence the coefficients will have a variance, this similar to sample mean
+	   We can find CI of coff of linear regression, this CI depends on the degree of freedom i.e no of 
+	   independent variable we have in equation. Now since we dont know the variance of population, 
+	   we use t-distribution, where degree of freedom is inversly propotional to the t value. Hence this tell the with  greater number of coeffs the margin error increases and hence the overall variance of the model.
