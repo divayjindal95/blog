@@ -208,4 +208,41 @@ Lecture 6 ( haunted DAG and causal terror)
 	Experiments are not nessecary for causal inference, we can as stated above backdoor criterion to do that. Experiments are always not feasible also. For example in order to study obesity, in case of exepriments we do different things to like excersise etc., that helps us study causal network, but it at the same also effects other things in life, which is the advantage of obeservational studies as you can study obesity directly.
 
 
-Lecture 7
+Lecture 7 :
+
+	1. R^2  : not a good way to evaluate a model, it basically gives variance of the target explained by the model. This can always increase if we overfit the model.
+	2. Overfit : too sensitive to data
+	3. Underfit : not sensitive to data
+	4. Regularize things:
+
+	5. Entropy : average of log probability. Quantifies the amount of uncertainity in distribution,  E[logp] = -plogp
+		1. Accuracy through entropy : This is can be found by kl-divergence, 
+			1. let p be true distribution, and q be the model, D_kl = p(logp - logq) = E[logp] - E[logq]
+			2. it is not symmetric : information distance is from mars to earth is more than earth to mars. This is the same reason why simpler models are better. This is the same reason why we want max entropy models/distributions are better as there is lesser element surprise here.
+			3. Dont need true prob, can directly check log(q), this is called deviance
+	6. Overfitting : Everyone overfits
+		1. With increase in sample size, number of param stops mattering.
+	7. Regulaization:
+		1. use conservatibe priors, instread of flat onces. Due to this model learns less from sample. But if to skeptical about priors then, very less is learnt from data. Flat priors work good in-sample, but very bad out-of-sample
+		2. But with more sample size, it turns out the flat priors perform same the not-flat ones out of sample.
+	8. We can even find out amount of overfitting (deviance) in out-of-sample  just from in sample and then look at the trade-off  of complexity vs out-of-sample .
+		1. Cross Validation:
+			1. leave one out
+			2. importance sampling
+			3. pareto smoothed importance sampling
+		2. AIC : Estimate  of kl divergence, comes with lot of assumptions ( flat priors and posterior follows normal distribution)
+			AIC = Dtrain +2K ( no of params) = Dtest
+		3. WAIC :Widely acceptable info criterion, more generalized form of AIC, no assumptions as such.
+
+		Dont use them for model selection, select them to understand the models.
+
+	9. Always put in unobserved variable in your dag. This will give better generalization and heko you avoid confounds.
+
+Lecture 8:
+	1. Accuracy is important, but other things matter too.
+	2. Stop testing, start thinking.
+	3. Interaction Effects : 
+		Interactions : Influence of predictors condition on other.
+			Do not split data as there is not statistical criterion to verify splitting.
+			Add index variable to get different params and plot them to see the things. Now we have a statistical support.
+			Always plot to get the intuition. 

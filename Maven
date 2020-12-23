@@ -1,0 +1,32 @@
+Maven
+
+
+Ant : build tool
+ivy : dependency manager for ant
+Maven : build and project management tool
+Gradle : 
+
+build -> life cycle -> phases -> goals
+plugins -> goals
+
+mvn <plugin>:<goal> : execute a goal
+mvn [life cycle phase]  : executes phase with preceding phase also executed
+mvn <plugin>:help : list all the goals of the plugin
+mvn help:describe -Dcmd=<phase> : list all the goals of a phase
+
+goal might be accociated to multiple phases
+plugin has multiple goals
+phase has multiple goals
+life cycle has multiple phases
+project have 3 default life cycles: default clean site
+A goal not bound to any build phase could be executed outside of the build lifecycle by direct invocation
+
+mvn archetype:jar
+
+
+
+
+Resources : 
+https://www.baeldung.com/maven-goals-phases
+https://www.tutorialspoint.com/maven/maven_build_life_cycle.html
+https://www.baeldung.com/ant-maven-gradle

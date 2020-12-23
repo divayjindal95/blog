@@ -1,0 +1,42 @@
+Basics of NLP:
+
+Pre-processing :
+	1. tokenization : 
+		break word to token
+	2. stemming : 
+		remve morphological and inflexional endings from words in English
+		porter's stemming is a 5 step process, it is a rule based algorithm
+	3. lemmatization : 
+		this is better than stemming as this considers context of the word .
+	4. POS: 
+		tag each word in sentence : Noun/Pronoun/Verb/Adverb/Adjective/Conjunction/Interjection/Preposition
+		Dataset : Pess tree bank (wsj tagging )
+		https://aclweb.org/aclwiki/POS_Tagging_(State_of_the_art)
+		https://web.stanford.edu/~jurafsky/slp3/8.pdf
+		Many ways to achieve this:
+			1. HMM
+			2. MEMM
+			3. Average Perceptron
+
+	5. NER
+
+Vector Creation:
+	1. tfidf : 
+	2. BM25 : 
+	3. LSA : 
+	3. Word2vec : 
+		1. continous bag of words : 
+		2. skip gram model : 
+	4. Doc2vec : 
+		1. Paragraph vector - Distributed bag of words
+		2. Paragraph vector - 
+	5. Glove:
+	Use n-gram co-occurence matrix to create word vectors. 
+
+
+Advance Techniques:
+	1. RNN
+	2. Bert
+
+
+- re-ranking

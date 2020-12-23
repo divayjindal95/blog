@@ -1,0 +1,51 @@
+Some Python Shit
+
+1. sys.module : dict of all the imported moduls
+2. sys.path : list of all the path where particular module is searched for
+3. dir(moduleName) :list out all the available attributes for a module/list/dictionary, . It is usually used for debugging purposes 
+4. dir() :
+5. __builtins__ : 
+
+during import/code execution : local-namespace -> global-namespace -> builtins/__buitin__
+
+6. Data struct is assigned a location in python, an the var points to that location, hence when you assign a new value to that variable, it point to a new location.
+e.g
+a = 10
+id(a) = 10000
+id(10) = 1000
+a = a+1
+id(a) = 12032
+id(11) = 12032
+
+7. integer values 0-256 have a predefined fixed location in python. 
+
+8. Every data structure ( even primary ones ) in python is class variable. Hence we can define integer as big as 2^100000 in python.
+
+9. In python primary types are immutable, tuple is immutable, other collections are mutable. Hence
+	def func(a=0, b=[]):
+		a =  a +1
+		b.append(10)
+	> func()
+	> func()
+	> print(b) : [10,10]
+	> print(a) : 0
+
+	Above a and b are defined in global scope and a being immutable doen not change, but b changes
+
+
+10 Decorators : its a pattern in which we assign a behaviour to object/function. It uses the concept of closurees.
+ e.g  we want to log the funnction name and machine ip it was run in when running a program in distributed manner. Let the function be compute()
+
+def decorator(func):
+	def wrapper(a,b):
+		logger.log('function is {}'.format())
+		return func(a,b)
+	return wrapper
+
+ def compute(a,b):
+ 	// computes
+
+ compute = decorater(compute)
+ compute(a=1,b=2)
+
+
