@@ -1,0 +1,75 @@
+Ansible : 
+For multi-server config managment and setup.
+Requires python nto be installed, purely works on ssh hence the central server/agent ( where ansible is installed and you running command from ) should be able to ssh to all the inventory servers.
+
+Inventory servers : are those which this agent is currently handling. hosts file will contain all the list of inventory servers along with thire group names. e.g host file
+
+[local]
+127.0.0.1
+
+[prod]
+192.12.32.12
+192.12.32.13
+192.12.32.14
+192.12.32.15
+
+Task : peace of comand to be eecuted on the servers
+
+Module : Ansible uses "modules" to accomplish most of its Task. e.g are shell,apt,service
+
+playbook : sequence of tasks is playbook, command to run it : ansible-playbook -s myplaybook.yml
+e.g :
+---
+- hosts: webservers
+  vars:
+    http_port: 80
+    max_clients: 200
+  remote_user: root
+  tasks:
+  - name: ensure apache is at the latest version
+    yum:
+      name: httpd
+      state: latest
+  - name: write the apache config file
+    template:
+      src: /srv/httpd.j2
+      dest: /etc/httpd.conf
+    notify:
+    - restart apache
+  - name: ensure apache is running
+    service:
+      name: httpd
+      state: started
+  handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted
+
+
+roles : to make playbook more clean, we use roles. 
+Roles are good for organizing multiple, related Tasks and encapsulating data needed to accomplish those Tasks.
+Directory structure :
+
+roles
+	-rolename
+		-tasks
+			-main.yml : defines tasks
+		-vars
+			-main.yml : different vars that are required
+		-templates : Template files can contain template variables
+		-handlers :	
+			-main.yml : defination of various handles
+		-meta : Role meta data, including dependencies.
+		-files : we can add files that we'll want copied into our servers
+
+We need to add path to role directory to ansible.config file
+Also to run this role we need master.yml where will add :
+
+master.yml
+---
+- hosts: all
+  roles:
+    - rolename
+
+ ansible-playbook -s master.yml

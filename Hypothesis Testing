@@ -1,29 +1,34 @@
-Hypothesis Testing:
+Hypothesis Testing: 
+We always start the test considering null hpothesis is true.
 
 1. define hypothesis:
-	what you want to find out
+	what you want to find out, choose the right metric that you want to evaluate
 3. collect data:
 	define features and collect data
 3. formulate analysis:
-	define significance level
-	compute test statistic
-	get the p value
-4. conclude
+		1. define significance level : alpha 
+			probabilty of obtaining statistic significantly different from true statistic by chance / luck
+			Can also be regarded is probility of making type 1 error ( false positive ) : which is alpha = 0.05 means that we are willing to take 5% risk of commiting type 1 error, i.e rejecting true null hypothesis.
+		2. compute test statistic
+		3. get the p value : 
+			probibilty of sampling test statistic calculated from step 2 from distribution of true statistic
+		4. Power analysis: probability of avoiding type 2 error = P(reject H_0 | H_a is true)
+
 
 
 Type of test:
 
 1. one sample :
 	1. known mean known variance
-		z test
+		>30 : z test
+		<30 : t test
 	2. known mean unknown variance
 		sample:
-			>30 : z-test
-			<30 : t-test
+			t-test
 	3. unknown mean known variance
-		z-test
+		>30 : z test
+		<30 : t test
 	4. unknown mean unknown variance
-			>30 : z-test
 			<30 : t-test
 In unknown mean cases what we are essentially doing is we are doing hypothesis test on the population mean itself. So we have sample mean and we are trying to hypothesis test that sample is from certain population mean.
 
@@ -35,9 +40,8 @@ Similarly, for a Large Sample, we have a high degree of freedom. And since t-dis
 
 3. sample propotion test
 
-assumtpion:
+assumption:
 1. normal 
-2. random independent sample
+2. random iid samples
 
-
-https://www.analyticsvidhya.com/blog/2020/06/statistics-analytics-hypothesis-testing-z-test-t-test/
+home_discover_viewed

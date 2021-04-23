@@ -13,8 +13,9 @@ mvn <plugin>:<goal> : execute a goal
 mvn [life cycle phase]  : executes phase with preceding phase also executed
 mvn <plugin>:help : list all the goals of the plugin
 mvn help:describe -Dcmd=<phase> : list all the goals of a phase
+mvn help:effective-pom : suoer pom that has all
 
-goal might be accociated to multiple phases
+a single goal might be accociated to multiple phases
 plugin has multiple goals
 phase has multiple goals
 life cycle has multiple phases
@@ -23,7 +24,7 @@ A goal not bound to any build phase could be executed outside of the build lifec
 
 mvn archetype:jar
 
-
+artifact
 
 
 Resources : 

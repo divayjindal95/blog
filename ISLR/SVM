@@ -1,0 +1,72 @@
+SVM
+
+Maximum Margin Classifier:
+The maximal margin hyperplane is the separating hyperplane for which the margin is largest—that is, it is the hyperplane that has the farthest minimum distance to the training observations.
+
+Points on the margin “support” the maximal margin hyperplane in the sense that if these points were moved slightly then the maximal margin hyper- plane would move as well. Interestingly, the maximal margin hyperplane depends directly on the support vectors, but not on the other observations
+
+Contruction:
+	wx + b = 0
+
+1. maximize M for all w, where M = |wX +b| / |w|, where X is data points
+2. |w|**2 = 1
+3. yi * (w*Xi + b) >= M
+
+
+Support Vector Classifier ( also called soft margin classifier)
+It might so happen that the data is not linearly seperable, then we modify the optimization a little bit:
+
+Contruction:
+	wx + b = 0
+
+1. maximize M for all w, where M = |wX +b| / |w|, where X is data points
+2. |w|**2 = 1
+3. yi * (w*Xi + b) >= M(1-ei)
+4. ei>=0 and sum e1<=C
+
+C is a hyper parameter
+ei's are called slack variables
+If εi > 0 then the ith observation is on the wrong side of the margin, and we say that the ith observation has violated the margin. If εi > 1 then it is on the wrong side of the hyperplane.
+
+C basically controls the bias variance . 
+For C=0, this converts to maximum margin classifier
+
+f(x) = b0 + SUM for i (ai aj yi <xi xj> ) 
+
+Support Vector Machines:
+For non-linearly seperable cases, we tend to enlarge the feature space such that, it makes the boudaries linear.
+The support vector machine (SVM) is an extension of the support vector classifier that results from enlarging the feature space in a specific way, using kernels
+
+Kernels act as the similarity function in SVM's . That is why rbf in general works because it tends to score high for the data points that are really close
+	rbf : exp(- lambda *( x- xi)**2) 
+
+Other kernels are sigmoid, polynomial etc.
+
+If kernel is simple dot product then SVM converts to SVC
+
+f(x) = b0 + SUM αiK(x,xi)
+
+
+
+# practical
+
+from sklean.svm import SVC
+
+svc = SVC(C=10,kernel = rbf')
+svc.fit(X,y)
+
+
+Langrage multipliers (primal):
+
+objective : min f(x)
+contraints : gi(x)<=0
+
+L(x,a) = f(x) - SUM for i ai*gi(x)
+
+Dual : just a way to convert minimization problem to maximiztion problem
+
+
+
+langrange : https://www.khanacademy.org/math/multivariable-calculus/applications-of-multivariable-derivatives/constrained-optimization/a/lagrange-multipliers-single-constraint
+
+https://jeremykun.com/2017/06/12/duality-for-the-svm/

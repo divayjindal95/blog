@@ -1,0 +1,99 @@
+User work flow
+
+master is something with is default both in local and remote repo
+
+1. git init
+Creates .git in your working directory where all the info is present
+
+2.  git status
+Tells what all files are present in the staging area, i,e what all files are being tracked ( modified or unmodified) or untracked.
+It basically checks .git/index file
+
+Git essentially has 4 main statuses for the files in your local repo:
+	•	untracked: The file is new, Git knows nothing about it. If you git add <file>, it becomes: 
+	•	staged: Now Git knows the file (tracked), but also made it part of the next commit batch (called the index). If you git commit, it becomes: 
+	•	unchanged: The file has not changed since its last commit. If you modify it, it becomes: 
+	•	unstaged: Modified but not part of the next commit yet. You can stage it again with git add 
+	•	As you can see, a git add will track untracked files, and stage any file.
+Also: You can untrack an uncommited file with git rm --cached filename and unstage a staged file with git reset HEAD <file>
+
+
+3. git add <file name>
+Adds the <filename> to the staging area. Basically modifies index]
+objects created for all files/dirextories in .git/objects
+
+4. .gitignore
+This contains the file you dont want to be tracked
+
+5. git reset <filename>
+Will remove file from staing area
+
+6. git commit -m “message”
+an oject is created in .git/objects
+
+7.git clone <url> <local location >
+clone command downloads the .git file from the remote repo and does all the things to extract the objects and create a full fleshed similar looking repository
+
+8. git remote -v
+gives the info of push and fetch urls
+
+9. git branch -a
+gives all the branches both local and remote
+
+
+10. git branch
+list all the local branches. With asterick on the current working branch
+
+10. git branch <branchname>
+create new branch/workspace with all the contents form the master
+
+10. git pull <remotename> <remote branchname>
+FETCHES the changes from <remotebranchename> to the local master ,and then those changes are MERGED to the current working branch
+
+11. git push <remotename> <remotebranchname>
+push changes from current working branch to <remotebranch>
+
+12. git checkout <branchname>
+gets you that <branchname>
+
+13. git branch –merged
+tells what all branches have been merged till now
+
+14. git merge <branchname>
+merges the <branchname> with current working branch
+
+15. git branch -d <branchname>
+deletes this branch from local
+
+16. git push origin –delete <branchname>
+deletes branch from remote even
+
+17. git reset head <commit ID>
+goes back to that commit without deleting newer/older commits
+
+18. git reset --hard <commit ID>
+goes back to that commit and deletes the all the commits after that.
+
+
+19. git stash
+pushes all the current changes that can be taken up later in the stack
+
+20. git pop
+removes all the previous push changes from the stack
+
+https://git-scm.com/book/en/v2/Git-Internals-Git-Objects
+https://www.slideshare.net/SeongJaePark1/deep-darkside-ofgit
+
+
+
+Dis-adv:
+
+Binary files are a big no: If your project has non-text files that are updated frequently (images for websites or MS Office documents), then git becomes bloated and slow. (I believe it still does better than most systems)
+Git is less preferred for handling extremely large files or frequently changing binary files .
+GIT does not support ‘commits’ across multiple branches or tags.
+
+IDEAS
+
+.git has large size , what if change some compression algo from gzip to diff one
+
+get a browser intervactive way of handling git commands
