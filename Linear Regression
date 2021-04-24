@@ -1,0 +1,104 @@
+Linear Regression
+
+f(x)  = b0 + b1*x + E
+
+y = b'0 + b1'*x
+
+RSS = SUM for all i (f(x) - y) ** 2
+
+Now since this is sample from the universe, for a different sample the betas will change.
+
+Standard Error of a statistic is the standard deviation of its sampling distribution.
+for e.g SE(mu) = sigma ** 2 / n
+
+Somehow we calculate the SE(b0) and SE(b1).
+Using t-distribution we can find p-value for b1=0 and b0=0 
+
+
+Accuracy :
+
+1. RSE : this is the estimated of standard deviation of irreducible error e.
+residual standard error = ROOT ( RSS / n-2 )
+
+2. R^2 : R2 measures the proportion of variability in Y that can be explained using X 
+  
+  R2 = 1 - RSS/TSS = COR(Y, Yhat)^2
+  RSS = SUM for i ( f(xi) - yi )**2 
+  TSS = SUM for i ( f(xi) - yhati)**2
+
+3.F Statistic
+
+
+Multiple Regression : if we have p distinct variable then we call it multiple regression, using least squares approach only we can figure out the RSS and then find out the betas as well using calculas.
+
+Some important questions:
+
+1. Is at least one of the predictors X1 , X2 , . . . , Xp useful in predicting the response?
+2. Do all the predictors help to explain Y, or is only a subset of the predictors useful?
+3. How well does the model fit the data?
+4. Given a set of predictor values, what response value should we predict,and how accurate is our prediction?
+
+
+
+
+1. Is there any realtionship between predictors and target variable: F statistic
+
+2. Deciding on Important Variables:
+	1. Following metrics could be used:
+		Mallow’s Cp, 
+		Akaike information criterion (AIC), 
+		Bayesian information criterion (BIC)
+		adjusted
+	2. three classical approaches for this task:
+		1. forward selection : fit p models and choose the one with best RSS, add another variable and fit p-1 model, choose the best, repeat until the stopping criterian is met.
+		2. backword selection : fit with all and remove the variable with largest p value, fit again and remove again until the stoping criterian is met.
+		3. Mixed selection  : fit one by one, and keep on checking the p values of the betas as well, this way you and and substract. 
+
+3. Model Fit:
+	1. R^2 : amount of variance explained, it will always increase with the inclusion of more variables and in training data the accuracy will increase hence the R^2 as well, but this would not mean the it will help in testing data as well. For the we need the check p or we can get an idea from how much improvment was seen in R^2
+	2. RSE : residula standard error, ROOT ( RSS / (n - p -1 )), hence if we increase p, it might so happen that the error will increase.
+
+4. Predictions : 
+	1. Bias : how much far off from the original function f(x)
+	2. Irreducible error : noise that cannot be reduced
+
+
+Extentions:
+
+Two of the most important assumptions state that the relationship between the predictors and response are additive and linear. Additive means that the effect of changes in a predictor Xj on the response Y is independent of the values of the other predictors. The linear assumption states that the change in the response Y due to a one-unit change in Xj is constant, regardless of the value of Xj
+
+Removing Additive Assumption:
+One way of extending this model to allow for interaction effects is to include a third predictor, called an interaction term
+	Y  = b0 + (b1+b2*X1)X2 + b3*X3
+In marketing, this is known as a synergy effect, and in statistics it is referred to as an interaction effect.
+The hierarchical principle states that if we include an interaction in a model, we should also include the main effects, even if the p-values associated with their coefficients are not significant. 
+
+Removing Linear Assumption:
+From plot we can figure out that the relationship between a predictor and target variable is non linear, hence we can include polynomial terms and apply the same framework of linear regression to fit the curve. This is polynomial regression.
+
+Potenitial Problems: 
+1. Non-linearity of the response-predictor relationships. 
+2. Correlation of error terms.
+3. Non-constant variance of error terms.
+4. Outliers.
+5. High-leverage points.
+6. Collinearity
+
+
+1. Non-linearity of the response-predictor relationships:
+Residual plots are a useful graphical tool for identifying non-linearity. Plot between f(x)-Y and Y. It we see a curvature then there is an issue.
+If the residual plot indicates that there are non-linear associations in the data, then a simple approach is to use non-linear transformations of the predictors, such as logX, √X, and X2, in the regression model.
+
+2. Correlation of Error Terms :
+
+3. Non constant Variance (hetrodescasity)
+
+4. Outliers
+
+5. Leverage
+
+6. Collinearity 
+
+
+
+

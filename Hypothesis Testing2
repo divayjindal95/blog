@@ -1,0 +1,43 @@
+Hypothesis Testing:
+
+1. define hypothesis:
+	what you want to find out
+3. collect data:
+	define features and collect data
+3. formulate analysis:
+	define significance level
+	compute test statistic
+	get the p value
+4. conclude
+
+
+Type of test:
+
+1. one sample :
+	1. known mean known variance
+		z test
+	2. known mean unknown variance
+		sample:
+			>30 : z-test
+			<30 : t-test
+	3. unknown mean known variance
+		z-test
+	4. unknown mean unknown variance
+			>30 : z-test
+			<30 : t-test
+In unknown mean cases what we are essentially doing is we are doing hypothesis test on the population mean itself. So we have sample mean and we are trying to hypothesis test that sample is from certain population mean.
+
+If the sample size is large enough, then the Z test and t-Test will conclude with the same results. For a large sample size, Sample Variance will be a better estimate of Population variance so even if population variance is unknown, we can use the Z test using sample variance.
+
+Similarly, for a Large Sample, we have a high degree of freedom. And since t-distribution approaches the normal distribution, the difference between the z score and t score is negligible.
+
+2. two sample 
+
+3. sample propotion test
+
+assumtpion:
+1. normal 
+2. random independent sample
+
+
+https://www.analyticsvidhya.com/blog/2020/06/statistics-analytics-hypothesis-testing-z-test-t-test/

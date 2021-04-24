@@ -1,0 +1,48 @@
+EDA
+
+1. missing values : look at column individually at understand why will the column go missing. Ways to do it :
+	- might not exist, adding nither class will help:
+
+	- might be missed, imputation will help:
+		- imputation using mean/median/knn/regressor will help
+
+
+2. Scaling and Normalization: for numerical
+	- scaling : changing the range of your data,
+		Why Scaling? 
+			- really important for some algorithms such as that have distance metric, like
+			kNN, kmeans, SVM, PCA
+			- gradient descent also works better with scaled features, its converges better because gradients are more uniform for different predictors.
+			- linear regression : better interpretation
+			- in regularization , feature scaling helps
+			- neural networks : required because of gradient descent
+		In following scaling is not required:
+			- gbm / decision trees / random forest
+			- linear regression without regularization
+			- naive bayes
+		Scaling should be done after train-validaton-test split to avoid data leak
+		- min-max 
+		- standard scalar / robust scalar
+		- power 
+
+	- normalization : changing the shape of the distribution of your data to Normal dist
+		Why Normalization?
+			- some algo assume data to be normally distributed, such as gussian naive bayes / LDA
+		How ?
+			- box-cox transformation
+			- log transform
+
+3. Text : 
+	- lower
+	- strip
+	- fuzzywuzzy
+
+
+4 Handing Categorical Data:
+	- One hot
+	- labelencoding
+	- mean encoding
+
+
+5 Data leakage:
+	- Train-Test Contamination : generally happens in case of preprocessing data like imputation / scaling/ norm done before train-test split
